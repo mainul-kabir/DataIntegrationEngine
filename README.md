@@ -8,11 +8,30 @@
 ![NMBGMR](https://waterdata.nmt.edu/static/nmbgmr_logo_resized.png)
 
 
-This package provides a command line interface to New Mexico Water Data Initiaive's Data Integration Engine. This tool is used to integrate the water data from multiple sources.
+This package provides a command line interface to New Mexico Water Data Initiative's Data Integration Engine. This tool is used to integrate the water data from multiple sources.
 
 ## Installation
 ```bash
 pip install nmuwd
+```
+
+## Running Tests
+Install project dependencies first, then run:
+
+```bash
+pytest
+```
+
+Run a single test file:
+
+```bash
+pytest tests/test_sources/test_nmbgmr_amp.py
+```
+
+Run one specific test:
+
+```bash
+pytest tests/test_sources/test_nmbgmr_amp.py::TestNMBGMRAMPSource::test_summary_csv
 ```
 
 ## Sources
@@ -59,7 +78,7 @@ where `{parameter}` is the name of the parameter whose data is to be retrieved, 
 |                            | waterlevels | arsenic | bicarbonate | calcium | carbonate | chloride | fluoride | magnesium | nitrate | ph  | potassium | silica | sodium | sulfate | tds | uranium |
 | -------------------------- | ----------- | ------- | ----------- | ------- | --------- | -------- | -------- | --------- | ------- | --- | --------- | ------ | ------ | ------- | --- | ------- |
 | **bernco**                 | X           | -       | -           | -       | -         | -        | -        | -         | -       | -   | -         | -      | -      | -       | -   | -       |
-| **bor**                    | -           | X       | -           | X       | -         | X        | X        | X         | X       | X   | X         | X      | X      | X       | X   | X       |
+| **bor**                    | -           | X       | X           | X       | -         | X        | X        | X         | X       | X   | X         | X      | X      | X       | X   | X       |
 | **cabq**                   | X           | -       | -           | -       | -         | -        | -        | -         | -       | -   | -         | -      | -      | -       | -   | -       |
 | **ebid**                   | X           | -       | -           | -       | -         | -        | -        | -         | -       | -   | -         | -      | -      | -       | -   | -       |
 | **nmbgmr-amp**             | X           | X       | X           | X       | X         | X        | X        | X         | X       | X   | X         | X      | X      | X       | X   | X       |
@@ -186,6 +205,12 @@ The Data Integration Engine enables the user to obtain groundwater level and gro
 - `--no-nwis` to exclude USGS NWIS data
 - `--no-pvacd` to exclude Pecos Valley Artesian Convservancy District (PVACD) data
 - `--no-wqp` to exclude Water Quality Portal (WQP) data
+
+Example:
+
+```bash
+die weave waterlevels --output-type summary --no-wqp --no-nwis
+```
 
 ### Geographic Filters [In Development]
 
